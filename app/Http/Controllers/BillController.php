@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Bill;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
+class BillController extends Controller
+{
+    public function index(){
+        $bill = DB::select("SELECT * FROM bills");
+        $branch = DB::select("SELECT * FROM branches");
+        $servicetax = DB::select("SELECT * FROM service_taxes");
+        $server = DB::select("SELECT * FROM servers");
+        $cashier = DB::select("SELECT * FROM cashiers");
+        // return $bill;
+        return view('main', ['bills'=>$bill, 'branches'=>$branch, 'servicesandtaxes'=>$servicetax, 'servers'=>$server, 'cashiers'=>$cashier]);
+    }
+
+    public function store(Request $request){
+        $bill = DB::insert(
+            'INSERT INTO bills (branch_id, date, table_no, service_tax_id, cashier_id, server_id) VALUES (:branch_id, :date, :table_no, :service_tax_id, :cashier_id, :server_id)',
+            [
+                'branch_id' => $request->branchid,
+                'date' => Carbon::now()->toDateString(),
+                'table_no' => $request->table_no,
+                'service_tax_id' => $request->service_tax_id,
+                'cashier_id' => $request->cashier_id,
+                'server_id' => $request->server_id,
+            ]);
+        return $bill;
+    }
+
+    public function history(){
+        $date = DB::select("SELECT DISTINCT date FROM bills ORDER BY date DESC");
+        return view('history', ['dates'=>$date]);
+    }
+
+    public function history_date($date){
+        $bill = DB::select("SELECT * FROM bills INNER JOIN cashiers ON bills.cashier_id = cashiers.id WHERE bills.date = ?", [$date]);
+        return view('history_per_date', ['bills'=>$bill]);
+    }
+
+    public function history_bill($bill_id){
+        $bill = DB::select("SELECT * FROM bills WHERE bills.id = ?", [$bill_id]);
+        return view('bill_information', ['bill'=>$bill]);
+    }
+
+    public function bill($bill_id){
+        $bill = DB::select("SELECT * FROM bills INNER JOIN branches ON bills.branch_id = branches.id INNER JOIN cashiers ON cashiers.id = bills.cashier_id INNER JOIN servers ON servers.id = bills.server_id INNER JOIN service_taxes ON service_taxes.id = bills.service_tax_id WHERE bills.id = ? limit 1", [$bill_id]);
+        // // $branch = $bill->branch;
+        // $branch = DB::select("SELECT * FROM branches WHERE branches.id = ? limit 1", [end($bill)->branch_id]);
+        // // $cashier = $bill->cashier;
+        // $cashier = DB::select("SELECT * FROM cashiers WHERE cashiers.id = ? limit 1", [end($bill)->cashier_id]);
+        // // $server = $bill->server;
+        // $server = DB::select("SELECT * FROM servers WHERE servers.id = ? limit 1", [end($bill)->server_id]);
+        // // $transactions = $bill->transactions;
+        // $servicetax = DB::select("SELECT * FROM service_taxes");
+        $transactions = DB::select("SELECT * FROM transactions INNER JOIN items ON transactions.item_id = items.id WHERE transactions.bill_id = ? and transactions.bill_id is not null", [$bill_id]);
+
+        return view('bill', ['bills'=>$bill, 'transactions'=>$transactions]);
+    }
+
+}

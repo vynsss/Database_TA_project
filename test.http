@@ -1,0 +1,75 @@
+#####
+GET http://localhost:8000/branches
+
+#####
+POST http://localhost:8000/branch
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name"  : "fx sudirman",
+    "phone" : "123"
+}
+
+#####
+POST http://localhost:8000/item
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name" : "tahu goreng",
+    "price": 26800
+}
+
+#####
+POST http://localhost:8000/server
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name" : "Kent Spv"
+}
+
+#####
+POST http://localhost:8000/cashier
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name" : "Brenda Spears"
+}
+
+#####
+POST http://localhost:8000/servicetax
+Content-Type: application/json
+Accept: application/json
+
+{
+    "service"   : 8,
+    "tax"       : 10
+}
+
+#####
+POST http://localhost:8000/bill
+Content-Type: application/json
+Accept: application/json
+
+{
+    "branchid"      : 1,
+    "table_no"      : 3,
+    "service_tax_id": 1,
+    "cashier_id"    : 1,
+    "server_id"     : 1
+}
+
+#####
+POST http://localhost:8000/transaction
+Content-Type: application/json
+Accept: application/json
+
+{
+    "bill_id"      : 1,
+    "item_id"      : 1,
+    "amount"       : 2
+}
+
