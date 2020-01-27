@@ -18,6 +18,69 @@
     <h3>Date: <script> document.write(new Date().toLocaleDateString()); </script></span></h3>
 </div>
 
+
+<button class=buttons id="addButton">Add Bill</button>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <form action = "" method = "POST">
+            <label for="branchid">Branch </label>
+            <select name = "branchid">
+                @foreach ($branches as $branch)
+                    <option value = "{{$branch->id}}">{{$branch->name}}</option>
+                @endforeach
+            </select>
+            <br>
+            <label for="table_no">Table </label>
+            <select name = "table_no">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10">10</option>
+                    <option value = "11">11</option>
+                    <option value = "12">12</option>
+                    <option value = "13">13</option>
+                    <option value = "14">14</option>
+                    <option value = "15">15</option>
+            </select>
+            <br>
+            <label for="service_tax_id">Service & Tax </label>
+            <select name = "service_tax_id">
+                @foreach ($servicesandtaxes as $snt)
+                    <option value = "{{$snt->id}}">{{$snt->service}}%, {{$snt->tax}}%</option>
+                @endforeach
+            </select>
+            <br>
+            <label for="cashier_id">Cashier </label>
+            <select name = "cashier_id">
+                @foreach ($cashiers as $cashier)
+                    <option value = "{{$cashier->id}}">{{$cashier->name}}</option>
+                @endforeach
+            </select>
+            <br>
+            <label for="server_id">Server </label>
+            <select name = "server_id">
+                @foreach ($servers as $server)
+                    <option value = "{{$server->id}}">{{$server->name}}</option>
+                @endforeach
+            </select>
+            <input class = "buttons" type = "submit" name = "submit">
+        </form>
+        </span>
+        </div>
+        <span class="close">add</span>
+    </div>
+</div>
+
+
 <table style="width:90%">
     <tr>
         <th>Bill ID</th>
@@ -31,112 +94,8 @@
             <td>{{$bill->cashier_id}}</td>
         </tr>
     @endforeach
-    {{-- <tr>
-        <td><a href="http://localhost:63342/dbta/bill_information.html?_ijt=rio8m8vnj73k5ut7jdsubhirra">12345</a></td>
-        <td>12</td>
-        <td>Vicky</td>
-    </tr>
-    <tr>
-        <td><a href="http://localhost:63342/dbta/bill_information.html?_ijt=rio8m8vnj73k5ut7jdsubhirra">34578</a></td>
-        <td>5</td>
-        <td>stefan</td>
-    </tr>
-    <tr>
-        <td><a href="http://localhost:63342/dbta/bill_information.html?_ijt=rio8m8vnj73k5ut7jdsubhirra">87654</a></td>
-        <td>10</td>
-        <td>Bahana</td>
-    </tr> --}}
 </table>
 
-<button class=buttons id="addButton">Add Bill</button>
-
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <div>Branch: <span>
-        <div class="dropdown">
-            <button class="dropbtn">[  ]</button>
-            <div class="dropdown-content">
-                @foreach ($branches as $branch)
-                    <a href = "#">{{$branch->name}}</a>
-                @endforeach
-                {{-- <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a> --}}
-            </div>
-        </div>
-        </span>
-        </div>
-        <div>
-            Table No: <span>
-        <div class="dropdown">
-            <button class="dropbtn">[  ]</button>
-            <div class="dropdown-content">
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
-                <a href="#">7</a>
-                <a href="#">8</a>
-                <a href="#">9</a>
-                <a href="#">10</a>
-                <a href="#">11</a>
-                <a href="#">12</a>
-                <a href="#">13</a>
-            </div>
-        </div>
-        </span>
-        </div>
-        <div>
-            Service & Tax: <span>
-        <div class="dropdown">
-            <button class="dropbtn">[  ]</button>
-            <div class="dropdown-content">
-                @foreach ($servicesandtaxes as $snt)
-                    <a href = "#">{{$snt->service}}%, {{$snt->tax}}%</a>
-                @endforeach
-                {{-- <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a> --}}
-            </div>
-        </div>
-        </span>
-        </div>
-        <div>
-            Cashier: <span>
-        <div class="dropdown">
-            <button class="dropbtn">[  ]</button>
-            <div class="dropdown-content">
-                @foreach ($cashiers as $cashier)
-                    <a href = "#">{{$cashier->name}}</a>
-                @endforeach
-                {{-- <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a> --}}
-            </div>
-        </div>
-        </span>
-        </div>
-        <div>
-            Server: <span>
-        <div class="dropdown">
-            <button class="dropbtn">[  ]</button>
-            <div class="dropdown-content">
-                @foreach ($servers as $server)
-                    <a href = "#">{{$server->name}}</a>
-                @endforeach
-                {{-- <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a> --}}
-            </div>
-        </div>
-        </span>
-        </div>
-        <span class="close">add</span>
-    </div>
-</div>
 
 <script>
     function openNav() {

@@ -30,7 +30,7 @@ class BillController extends Controller
                 'cashier_id' => $request->cashier_id,
                 'server_id' => $request->server_id
             ]);
-        return $bill;
+        return back();
     }
 
     public function history(){

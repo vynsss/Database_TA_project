@@ -24,7 +24,7 @@ Route::get('/items', 'ItemController@index');
 Route::post('/item', 'ItemController@store');
 
 Route::get('/bills', 'BillController@index');
-Route::post('/bill', 'BillController@store');
+Route::post('/bills', 'BillController@store');
 Route::get('/billidk/{id}', 'BillController@bill');
 
 Route::get('/histories', 'BillController@history');
