@@ -15,7 +15,7 @@
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 <div class = the-header>
     <h2>History</h2>
-    <h3>Date: <span>.. / .. / ....</span></h3>
+    <h3>Date: <span>{{$date}}</span></h3>
 </div>
 
 <table style="width:90%">

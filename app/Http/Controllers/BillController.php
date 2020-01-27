@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class BillController extends Controller
 {
     public function index(){
-        $bill = DB::select("SELECT * FROM bills");
+        $bill = DB::select("SELECT * FROM bills WHERE bills.close IS NULL");
         $branch = DB::select("SELECT * FROM branches");
         $servicetax = DB::select("SELECT * FROM service_taxes");
         $server = DB::select("SELECT * FROM servers");
@@ -39,8 +39,8 @@ class BillController extends Controller
     }
 
     public function history_date($date){
-        $bill = DB::select("SELECT * FROM bills INNER JOIN cashiers ON bills.cashier_id = cashiers.id WHERE bills.date = ?", [$date]);
-        return view('history_per_date', ['bills'=>$bill]);
+        $bill = DB::select("SELECT * FROM bills INNER JOIN cashiers ON bills.cashier_id = cashiers.id WHERE bills.close = ? AND bills.date IS NOT NULL", [$date]);
+        return view('history_per_date', ['bills'=>$bill, 'date'=>$date]);
     }
 
     public function history_bill($bill_id){
