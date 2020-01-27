@@ -44,8 +44,11 @@ class BillController extends Controller
     }
 
     public function history_bill($bill_id){
-        $bill = DB::select("SELECT * FROM bills WHERE bills.id = ?", [$bill_id]);
-        return view('bill_information', ['bill'=>$bill]);
+        $bill = DB::select("SELECT * FROM bills INNER JOIN branches ON bills.branch_id = branches.id INNER JOIN cashiers ON cashiers.id = bills.cashier_id INNER JOIN servers ON servers.id = bills.server_id INNER JOIN service_taxes ON service_taxes.id = bills.service_tax_id WHERE bills.id = ? limit 1", [$bill_id]);
+        $items = DB::select("SELECT * FROM items");
+        $transactions = DB::select("SELECT * FROM transactions INNER JOIN items ON transactions.item_id = items.id WHERE transactions.bill_id = ? and transactions.bill_id is not null", [$bill_id]);
+
+        return view('bill_information', ['bill'=>$bill, 'items'=>$items, 'transactions'=>$transactions, 'bill_id'=>$bill_id]);
     }
 
     public function bill($bill_id){
@@ -62,6 +65,11 @@ class BillController extends Controller
         $transactions = DB::select("SELECT * FROM transactions INNER JOIN items ON transactions.item_id = items.id WHERE transactions.bill_id = ? and transactions.bill_id is not null", [$bill_id]);
 
         return view('bill', ['bills'=>$bill, 'items'=>$items, 'transactions'=>$transactions, 'bill_id'=>$bill_id]);
+    }
+
+    public function close_bill($bill_id){
+        $close = DB::update('update bills set close = CURDATE() where id = ?', [$bill_id]);
+        return redirect('/historybill/{{$bill_id}}');
     }
 
 }

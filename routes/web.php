@@ -17,27 +17,37 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/branches', 'BranchController@index');
-Route::post('/branch', 'BranchController@store');
 
-Route::get('/items', 'ItemController@index');
-Route::post('/item', 'ItemController@store');
+//BRANCHES
+Route::get('/branches', 'BranchController@index');                  //list
+Route::post('/branch', 'BranchController@store');                   //insert
 
-Route::get('/bills', 'BillController@index');
-Route::post('/bills', 'BillController@store');
-Route::get('/billidk/{id}', 'BillController@bill');
+//ITEMS
+Route::get('/items', 'ItemController@index');                       //list
+Route::post('/item', 'ItemController@store');                       //insert
 
-Route::get('/histories', 'BillController@history');
-Route::get('/historydate/{date}', 'BillController@history_date');
+//SERVER
+Route::get('/servers', 'ServerController@index');                   //list
+Route::post('/server', 'ServerController@store');                   //insert
 
-Route::get('/servers', 'ServerController@index');
-Route::post('/server', 'ServerController@store');
+//CASHIER
+Route::get('/cashiers', 'CashierController@index');                 //list
+Route::post('/cashier', 'CashierController@store');                 //insert
 
-Route::get('/cashiers', 'CashierController@index');
-Route::post('/cashier', 'CashierController@store');
+//SERVICE AND TAX
+Route::get('/servicestaxes', 'ServiceTaxController@index');         //list
+Route::post('/servicetax', 'ServiceTaxController@store');           //insert
 
-Route::get('/servicestaxes', 'ServiceTaxController@index');
-Route::post('/servicetax', 'ServiceTaxController@store');
+//TRANSACTION
+Route::get('/transactions', 'TransactionController@index');         //list
+Route::post('/billidk/{id}', 'TransactionController@store');        //insert
 
-Route::get('/transactions', 'TransactionController@index');
-Route::post('/billidk/{id}', 'TransactionController@store');
+//BILL
+Route::get('/bills', 'BillController@index');                       //list
+Route::post('/bills', 'BillController@store');                      //insert
+Route::get('/billidk/{id}', 'BillController@bill');                 //particular
+Route::post('/billidk/{id}', 'BillController@close_bill');          //update
+//BILL FOR HISTORY
+Route::get('/histories', 'BillController@history');                 //list
+Route::get('/historydate/{date}', 'BillController@history_date');   //particular
+Route::get('/historybill/{id}', 'BillController@history_bill');

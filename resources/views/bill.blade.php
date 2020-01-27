@@ -160,8 +160,10 @@
     @endforeach
 </table>
 
-
-<button class=buttons id="closeButton">Close Bill</button>
+<form action="/billidk/{{$bill_id}}" method = "POST">
+{{-- <input class=buttons id="closeButton"Close Bill> --}}
+<input class = "buttons" type = "submit" value = "Close Bill">
+</form>
 <script>
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
