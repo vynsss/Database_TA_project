@@ -13,6 +13,7 @@ class Bill extends Model
         'server_id',
         'service_tax_id',
         'branch_id',
+        'close'
     ];
 
     public function cashier()

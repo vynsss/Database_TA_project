@@ -28,7 +28,7 @@ class BillController extends Controller
                 'table_no' => $request->table_no,
                 'service_tax_id' => $request->service_tax_id,
                 'cashier_id' => $request->cashier_id,
-                'server_id' => $request->server_id,
+                'server_id' => $request->server_id
             ]);
         return $bill;
     }
@@ -58,9 +58,10 @@ class BillController extends Controller
         // $server = DB::select("SELECT * FROM servers WHERE servers.id = ? limit 1", [end($bill)->server_id]);
         // // $transactions = $bill->transactions;
         // $servicetax = DB::select("SELECT * FROM service_taxes");
+        $items = DB::select("SELECT * FROM items");
         $transactions = DB::select("SELECT * FROM transactions INNER JOIN items ON transactions.item_id = items.id WHERE transactions.bill_id = ? and transactions.bill_id is not null", [$bill_id]);
 
-        return view('bill', ['bills'=>$bill, 'transactions'=>$transactions]);
+        return view('bill', ['bills'=>$bill, 'items'=>$items, 'transactions'=>$transactions]);
     }
 
 }

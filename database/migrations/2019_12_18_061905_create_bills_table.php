@@ -21,6 +21,7 @@ class CreateBillsTable extends Migration
             $table->unsignedBigInteger('cashier_id');
             $table->unsignedBigInteger('server_id');
             $table->unsignedBigInteger('service_tax_id');
+            $table->dateTime('close')->nullable();
             $table->timestamps();
 
             // Foreign Keys

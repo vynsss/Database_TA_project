@@ -10,7 +10,8 @@ class ItemController extends Controller
 {
     public function index(){
         $item = DB::select("SELECT * FROM items"); //table doesnt exist?
-        return $item;
+        // return $item;
+        return view('bill', ['items'=>$item]);
     }
 
     public function store(Request $request){

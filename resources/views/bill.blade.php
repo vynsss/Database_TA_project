@@ -128,7 +128,10 @@
         <div class="dropdown">
             <button class="dropbtn">[  ]</button>
             <div class="dropdown-content">
-                <a href="#">Chicken</a>
+                @foreach ($items as $item)
+                    <a href="#">{{$item->name}}</a>
+                @endforeach
+                {{-- <a href="#">Chicken</a>
                 <a href="#">Tuna</a>
                 <a href="#">Crab</a>
                 <a href="#">Lobster</a>
@@ -139,7 +142,7 @@
                 <a href="#">Pizza</a>
                 <a href="#">Pasta</a>
                 <a href="#">Noodle</a>
-                <a href="#">Rice</a>
+                <a href="#">Rice</a> --}}
             </div>
         </div>
         </span>
