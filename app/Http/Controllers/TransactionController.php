@@ -13,15 +13,16 @@ class TransactionController extends Controller
         return $transaction;
     }
 
-    public function store(Request $request){
+    public function store(Request $request, $id){
         $transaction = DB::insert(
             'INSERT INTO transactions (bill_id, item_id, amount) VALUES (:bill_id, :item_id, :amount)',
             [
-                'bill_id' => $request->bill_id,
+                // 'bill_id' => $request->bill_id,
+                'bill_id' => $id,
                 'item_id' => $request->item_id,
                 'amount' => $request->amount
             ]);
-        return $transaction;
+        return back();
     }
 
     public function transaction($bill_id){

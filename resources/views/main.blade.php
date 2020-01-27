@@ -72,7 +72,7 @@
                     <option value = "{{$server->id}}">{{$server->name}}</option>
                 @endforeach
             </select>
-            <input class = "buttons" type = "submit" name = "submit">
+            <input class = "buttons" type = "submit" name = "add">
         </form>
         </span>
         </div>

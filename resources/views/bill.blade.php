@@ -18,7 +18,7 @@
 <h3>Date: <span><script> document.write(new Date().toLocaleDateString()); </script></span></h3>
 </div>
 
-<button class=buttons id="editButton">Edit Bill</button>
+{{-- <button class=buttons id="editButton">Edit Bill</button>
 
 <div id="theModal" class="modal">
     <div class="modal-content">
@@ -39,26 +39,77 @@
                     <td><button>-</button></td>
                 </tr>
             @endforeach
-            {{-- <tr>
-                <td>Chicken</td>
-                <td>12</td>
-                <td><button>+</button></td>
-                <td><button>-</button></td>
-            </tr>
-            <tr>
-                <td>fish</td>
-                <td>5</td>
-                <td><button>+</button></td>
-                <td><button>-</button></td>
-            </tr>
-            <tr>
-                <td>carrot</td>
-                <td>10</td>
-                <td><button>+</button></td>
-                <td><button>-</button></td>
-            </tr> --}}
         </table>
         <button class=buttons id="changeButton">Edit Bill</button>
+    </div>
+</div> --}}
+
+<button class=buttons id="addButton">Add Menu</button>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form action = "/billidk/{{$bill_id}}" method = "POST">
+            <label value = "{{$bill_id}}">
+            <label for="items">items </label>
+            <select name = "item_id">
+                @foreach ($items as $item)
+                    <option value = "{{$item->id}}">{{$item->name}}</option>
+                @endforeach
+            </select>
+            <br>
+            <label for="amount">amount </label>
+            <select name = "amount">
+                <option value = "1">1</option>
+                <option value = "2">2</option>
+                <option value = "3">3</option>
+                <option value = "4">4</option>
+                <option value = "5">5</option>
+                <option value = "6">6</option>
+                <option value = "7">7</option>
+                <option value = "8">8</option>
+                <option value = "9">9</option>
+                <option value = "10">10</option>
+                <option value = "11">11</option>
+                <option value = "12">12</option>
+                <option value = "13">13</option>
+                <option value = "14">14</option>
+                <option value = "15">15</option>
+            </select>
+            <input class = "buttons" type = "submit" value = "add">
+        </form>
+        {{-- <div>Menu: <span>
+        <div class="dropdown">
+            <button class="dropbtn">[  ]</button>
+            <div class="dropdown-content">
+                @foreach ($items as $item)
+                    <a href="#">{{$item->name}}</a>
+                @endforeach
+            </div>
+        </div>
+        </span>
+        </div>
+        <div>
+            Quantity: <span>
+        <div class="dropdown">
+            <button class="dropbtn">[  ]</button>
+            <div class="dropdown-content">
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">7</a>
+                <a href="#">8</a>
+                <a href="#">9</a>
+                <a href="#">10</a>
+                <a href="#">11</a>
+                <a href="#">12</a>
+            </div>
+        </div> --}}
+        </span>
+        </div>
     </div>
 </div>
 
@@ -96,6 +147,7 @@
         <th>Menu</th>
         <th>price</th>
         <th>total price</th>
+        <th></th>
     </tr>
     @foreach ($transactions as $transaction)
         <tr>
@@ -103,73 +155,11 @@
             <td>{{$transaction->name}}</td>
             <td>{{$transaction->price}}</td>
             <td>{{$transaction->price * $transaction->amount}}</td>
+            <td style="text-align: center"><button>+</button><button>-</button><button>x</button>
         </tr>
     @endforeach
-    {{-- <tr>
-        <td>Chicken</td>
-        <td>12</td>
-    </tr>
-    <tr>
-        <td>fish</td>
-        <td>5</td>
-    </tr>
-    <tr>
-        <td>carrot</td>
-        <td>10</td>
-    </tr> --}}
 </table>
 
-<button class=buttons id="addButton">Add Menu</button>
-
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <div>Menu: <span>
-        <div class="dropdown">
-            <button class="dropbtn">[  ]</button>
-            <div class="dropdown-content">
-                @foreach ($items as $item)
-                    <a href="#">{{$item->name}}</a>
-                @endforeach
-                {{-- <a href="#">Chicken</a>
-                <a href="#">Tuna</a>
-                <a href="#">Crab</a>
-                <a href="#">Lobster</a>
-                <a href="#">Egg</a>
-                <a href="#">Sushi</a>
-                <a href="#">Tomato</a>
-                <a href="#">Bread</a>
-                <a href="#">Pizza</a>
-                <a href="#">Pasta</a>
-                <a href="#">Noodle</a>
-                <a href="#">Rice</a> --}}
-            </div>
-        </div>
-        </span>
-        </div>
-        <div>
-            Quantity: <span>
-        <div class="dropdown">
-            <button class="dropbtn">[  ]</button>
-            <div class="dropdown-content">
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
-                <a href="#">7</a>
-                <a href="#">8</a>
-                <a href="#">9</a>
-                <a href="#">10</a>
-                <a href="#">11</a>
-                <a href="#">12</a>
-            </div>
-        </div>
-        </span>
-        </div>
-    </div>
-</div>
 
 <button class=buttons id="closeButton">Close Bill</button>
 <script>

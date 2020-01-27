@@ -61,7 +61,7 @@ class BillController extends Controller
         $items = DB::select("SELECT * FROM items");
         $transactions = DB::select("SELECT * FROM transactions INNER JOIN items ON transactions.item_id = items.id WHERE transactions.bill_id = ? and transactions.bill_id is not null", [$bill_id]);
 
-        return view('bill', ['bills'=>$bill, 'items'=>$items, 'transactions'=>$transactions]);
+        return view('bill', ['bills'=>$bill, 'items'=>$items, 'transactions'=>$transactions, 'bill_id'=>$bill_id]);
     }
 
 }

@@ -40,4 +40,4 @@ Route::get('/servicestaxes', 'ServiceTaxController@index');
 Route::post('/servicetax', 'ServiceTaxController@store');
 
 Route::get('/transactions', 'TransactionController@index');
-Route::post('/transaction', 'TransactionController@store');
+Route::post('/billidk/{id}', 'TransactionController@store');
