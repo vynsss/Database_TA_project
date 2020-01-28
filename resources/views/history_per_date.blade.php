@@ -26,7 +26,7 @@
     </tr>
     @foreach ($bills as $bill)
     <tr>
-        <td><a href="http://localhost:8000/billidk/{{$bill->id}}">{{$bill->id}}</a></td>
+        <td><a href="http://localhost:8000/historybill/{{$bill->id}}">{{$bill->id}}</a></td>
         <td>{{$bill->table_no}}</td>
         <td>{{$bill->name}}</td>
     </tr>

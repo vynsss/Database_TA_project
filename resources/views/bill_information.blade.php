@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ URL::asset('style.css') }}">
 </head>
 <body>
 
@@ -15,33 +15,29 @@
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 <div class = the-header>
     <h2>Information</h2>
-    <h3>Date: <span><script> document.write(new Date().toLocaleDateString()); </script></span></h3>
-    <h3>Bill ID: <span>12345</span></h3>
-    <h3>Table No: <span>07</span></h3>
-    <h3>Cashier: <span>Vicky</span></h3>
+    <h3>Date: <span>{{end($bill)->date}}</span></h3>
+    <h3>Bill ID: <span>{{end($bill)->id}}</span></h3>
+    <h3>Table No: <span>{{end($bill)->table_no}}</span></h3>
+    <h3>Cashier: <span>{{end($cashier)->name}}</span></h3>
 </div>
 
 <table style="width:90%">
     <tr>
-        <th>Menu</th>
         <th>Quantity</th>
-        <th>Total Price</th>
+        <th>Menu</th>
+        <th>price</th>
+        <th>total price</th>
+        <th></th>
     </tr>
-    <tr>
-        <td>Chicken</td>
-        <td>12</td>
-        <td>350,000</td>
-    </tr>
-    <tr>
-        <td>Lobster</td>
-        <td>5</td>
-        <td>1,450,000</td>
-    </tr>
-    <tr>
-        <td>Mushroom</td>
-        <td>2</td>
-        <td>65,000</td>
-    </tr>
+    @foreach ($transactions as $transaction)
+        <tr>
+            <td>{{$transaction->amount}}</td>
+            <td>{{$transaction->name}}</td>
+            <td>{{$transaction->price}}</td>
+            <td>{{$transaction->price * $transaction->amount}}</td>
+            <td style="text-align: center"><button>+</button><button>-</button><button>x</button>
+        </tr>
+    @endforeach
 </table>
 
 <button class=buttons id="backButton">Back</button>
