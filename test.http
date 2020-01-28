@@ -17,8 +17,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "name" : "mie goreng",
-    "price": 35000
+    "name" : "Teh O Peng",
+    "price": 9800
 }
 
 #####

@@ -65,14 +65,14 @@ class BillController extends Controller
     }
 
     public function bill($bill_id){
-        $bill = DB::select("SELECT * FROM bills INNER JOIN branches ON bills.branch_id = branches.id INNER JOIN cashiers ON cashiers.id = bills.cashier_id INNER JOIN servers ON servers.id = bills.server_id INNER JOIN service_taxes ON service_taxes.id = bills.service_tax_id WHERE bills.id = ? limit 1", [$bill_id]);
+        $bill = DB::select("SELECT *, branches.name AS branch_name, cashiers.name AS cashier_name, servers.name AS server_name FROM bills INNER JOIN branches ON bills.branch_id = branches.id INNER JOIN cashiers ON cashiers.id = bills.cashier_id INNER JOIN servers ON servers.id = bills.server_id INNER JOIN service_taxes ON service_taxes.id = bills.service_tax_id WHERE bills.id = ? limit 1", [$bill_id]);
         $items = DB::select("SELECT * FROM items");
         $transactions = DB::select("SELECT *, transactions.id AS transaction_id, items.id AS item_id FROM transactions INNER JOIN items ON transactions.item_id = items.id WHERE transactions.bill_id = ? and transactions.bill_id is not null", [$bill_id]);
 
         $calc = DB::select("SELECT SUM(transactions.amount*items.price) AS sub_total,
                 (SUM(transactions.amount*items.price) * service_taxes.service)/100 AS service_,
-                (SUM(transactions.amount*items.price) * service_taxes.tax)/100 AS tax,
-                (SUM(transactions.amount*items.price) + service + tax) AS total
+                ((SUM(transactions.amount*items.price) + (SUM(transactions.amount*items.price) * service_taxes.service)/100) * service_taxes.tax)/100 AS tax,
+                (SUM(transactions.amount*items.price) + (SUM(transactions.amount*items.price) * service_taxes.service)/100 + ((SUM(transactions.amount*items.price) + (SUM(transactions.amount*items.price) * service_taxes.service)/100) * service_taxes.tax)/100) AS total
                 FROM bills
                 INNER JOIN transactions ON transactions.bill_id = bills.id
                 INNER JOIN items ON items.id = transactions.item_id
@@ -85,7 +85,7 @@ class BillController extends Controller
 
     public function close_bill($bill_id){
         $close = DB::update('update bills set close = CURDATE() where id = ?', [$bill_id]);
-        return back();
+        return redirect('bills');
     }
 
 }

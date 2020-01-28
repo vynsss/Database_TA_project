@@ -14,8 +14,11 @@
 
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 <div class = my-header>
-    <h2>Restaurant Management (Bill)</h2>
-<h3>Date: <span><script> document.write(new Date().toLocaleDateString()); </script></span></h3>
+    <h2>SPICE PARADISE</h2>
+    <h2>{{end($bills)->branch_name}}</h2>
+    <h2>{{end($bills)->phone}}</h2>
+<h3><span><script> document.write(new Date().toLocaleDateString()); </script></span></h3>
+<h3>Bills Table: <span> {{end($bills)->table_no}} </span></h3>
 </div>
 
 <button class=buttons id="editButton">Edit Bill</button>
@@ -140,10 +143,15 @@
 </table>
 
 <div class = the-total>
-    <h3>Sub Total: <span>{{round($calc[0]->sub_total, 0)}}</span></h3>
-    <h3>Service: <span>{{round($calc[0]->service_, 0)}}</span></h3>
-    <h3>Tax: <span>{{round($calc[0]->tax, 0)}}</span></h3>
-    <h3>Total: <span>{{round($calc[0]->total, 0)}}</span></h3>
+    <h3>Sub Total   : <span>{{round($calc[0]->sub_total, 0)}}</span></h3>
+    <h3>Service     : <span>{{round($calc[0]->service_, 0)}}</span></h3>
+    <h3>Tax         : <span>{{round($calc[0]->tax, 0)}}</span></h3>
+    <h3>Total       : <span>{{round($calc[0]->total, 0)}}</span></h3>
+</div>
+
+<div class = my-header>
+<h3>Cashier     : <span> {{end($bills)->cashier_name}} </span></h3>
+<h3>Server      : <span> {{end($bills)->server_name}} </span></h3>
 </div>
 
 <form action="/billidk/close/{{$bill_id}}" method = "POST">

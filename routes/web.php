@@ -41,10 +41,9 @@ Route::post('/servicetax', 'ServiceTaxController@store');           //insert
 //TRANSACTION
 Route::get('/transactions', 'TransactionController@index');         //list
 Route::post('/billidk/{id}', 'TransactionController@store');        //insert
-Route::post('/billidk/add/{id}', 'TransactionController@add_qty');
-Route::post('/billidk/min/{id}', 'TransactionController@min_qty');
-Route::post('/billidk/remove/{id}', 'TransactionController@remove_qty');
-// Route::get('/historybill/{id}', 'TransactionController@transaction');//particular
+Route::post('/billidk/add/{id}', 'TransactionController@add_qty');  //update add
+Route::post('/billidk/min/{id}', 'TransactionController@min_qty');  //update min
+Route::post('/billidk/remove/{id}', 'TransactionController@remove_qty');//remove
 
 //BILL
 Route::get('/bills', 'BillController@index');                       //list
@@ -53,6 +52,5 @@ Route::get('/billidk/{id}', 'BillController@bill');                 //particular
 Route::post('/billidk/close/{id}', 'BillController@close_bill');    //update
 //BILL FOR HISTORY
 Route::get('/histories', 'BillController@history');                 //list
-Route::get('/historydate/{date}', 'BillController@history_date');   //particular
-Route::get('/historybill/{id}', 'BillController@history_bill');
-// Route::get('/historybill/{id}', 'BillController@calculate');
+Route::get('/historydate/{date}', 'BillController@history_date');   //particular date
+Route::get('/historybill/{id}', 'BillController@history_bill');     //particular id
