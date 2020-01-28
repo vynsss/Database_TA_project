@@ -16,9 +16,9 @@
 <div class = the-header>
     <h2>Information</h2>
     <h3>Date: <span>{{end($bill)->date}}</span></h3>
-    <h3>Bill ID: <span>{{end($bill)->id}}</span></h3>
+    <h3>Bill ID: <span>{{end($bill)->bill_id}}</span></h3>
     <h3>Table No: <span>{{end($bill)->table_no}}</span></h3>
-    <h3>Cashier: <span>{{end($cashier)->name}}</span></h3>
+    <h3>Cashier: <span>{{end($bill)->cashier_id}}</span></h3>
 </div>
 
 <table style="width:90%">
@@ -39,10 +39,10 @@
 </table>
 
 <div class = the-total>
-    <h3>Sub Total: <span>{{end($bill)->date}}</span></h3>
-    <h3>Service: <span>{{end($bill)->id}}</span></h3>
-    <h3>Tax: <span>{{end($bill)->table_no}}</span></h3>
-    <h3>Total: <span>{{end($bill)->table_no}}</span></h3>
+    <h3>Sub Total: <span>{{round($calc[0]->sub_total, 0)}}</span></h3>
+    <h3>Service: <span>{{round($calc[0]->service_, 0)}}</span></h3>
+    <h3>Tax: <span>{{round($calc[0]->tax, 0)}}</span></h3>
+    <h3>Total: <span>{{round($calc[0]->total, 0)}}</span></h3>
 </div>
 
 <button class=buttons id="backButton">Back</button>

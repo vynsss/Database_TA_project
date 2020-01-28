@@ -128,7 +128,6 @@
         <th>Menu</th>
         <th>price</th>
         <th>total price</th>
-        <th></th>
     </tr>
     @foreach ($transactions as $transaction)
         <tr>
@@ -136,26 +135,16 @@
             <td>{{$transaction->name}}</td>
             <td>{{$transaction->price}}</td>
             <td>{{$transaction->price * $transaction->amount}}</td>
-            <td style="text-align: center">
-                {{-- <form action="/billidk/add/{bill_id}/{item_id}" method = "POST">
-                    <label value = "{{$bill_id}}">
-                    <label value = "{{$transaction->item_id}}">
-                    <input class = "buttons" type = "submit" value = "+">
-                </form>
-                <form action="/billidk/min/{bill_id}/{item_id}" method = "POST">
-                    <label value = "{{$bill_id}}">
-                    <label value = "{{$transaction->item_id}}">
-                    <input class = "buttons" type = "submit" value = "-">
-                </form>
-                <form action="/billidk/remove/{bill_id}/{item_id}" method = "POST">
-                    <label value = "{{$bill_id}}">
-                    <label value = "{{$transaction->item_id}}">
-                    <input class = "buttons" type = "submit" value = "x">
-                </form> --}}
-            </td>
         </tr>
     @endforeach
 </table>
+
+<div class = the-total>
+    <h3>Sub Total: <span>{{round($calc[0]->sub_total, 0)}}</span></h3>
+    <h3>Service: <span>{{round($calc[0]->service_, 0)}}</span></h3>
+    <h3>Tax: <span>{{round($calc[0]->tax, 0)}}</span></h3>
+    <h3>Total: <span>{{round($calc[0]->total, 0)}}</span></h3>
+</div>
 
 <form action="/billidk/close/{{$bill_id}}" method = "POST">
 {{-- <input class=buttons id="closeButton"Close Bill> --}}
