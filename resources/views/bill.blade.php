@@ -18,7 +18,7 @@
 <h3>Date: <span><script> document.write(new Date().toLocaleDateString()); </script></span></h3>
 </div>
 
-{{-- <button class=buttons id="editButton">Edit Bill</button>
+<button class=buttons id="editButton">Edit Bill</button>
 
 <div id="theModal" class="modal">
     <div class="modal-content">
@@ -30,19 +30,30 @@
                 <th>Quantity</th>
                 <th>Add</th>
                 <th>Subtract</th>
+                <th>Remove</th>
             </tr>
             @foreach ($transactions as $transaction)
                 <tr>
                     <td>{{$transaction->name}}</td>
                     <td>{{$transaction->amount}}</td>
-                    <td><button>+</button></td>
-                    <td><button>-</button></td>
+                    <td><form action="/billidk/add/{{$transaction->transaction_id}}" method = "POST">
+                        <label value = "{{$transaction->transaction_id}}">
+                        <input class = "buttons" type = "submit" value = " + ">
+                    </form></td>
+                    <td><form action="/billidk/min/{{$transaction->transaction_id}}" method = "POST">
+                        <label value = "{{$transaction->transaction_id}}">
+                        <input class = "buttons" type = "submit" value = " - ">
+                    </form></td>
+                    <td><form action="/billidk/remove/{{$transaction->transaction_id}}" method = "POST">
+                        <label value = "{{$transaction->transaction_id}}">
+                        <input class = "buttons" type = "submit" value = " x ">
+                    </form></td>
                 </tr>
             @endforeach
         </table>
         <button class=buttons id="changeButton">Edit Bill</button>
     </div>
-</div> --}}
+</div>
 
 <button class=buttons id="addButton">Add Menu</button>
 
@@ -78,36 +89,6 @@
             </select>
             <input class = "buttons" type = "submit" value = "add">
         </form>
-        {{-- <div>Menu: <span>
-        <div class="dropdown">
-            <button class="dropbtn">[  ]</button>
-            <div class="dropdown-content">
-                @foreach ($items as $item)
-                    <a href="#">{{$item->name}}</a>
-                @endforeach
-            </div>
-        </div>
-        </span>
-        </div>
-        <div>
-            Quantity: <span>
-        <div class="dropdown">
-            <button class="dropbtn">[  ]</button>
-            <div class="dropdown-content">
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
-                <a href="#">7</a>
-                <a href="#">8</a>
-                <a href="#">9</a>
-                <a href="#">10</a>
-                <a href="#">11</a>
-                <a href="#">12</a>
-            </div>
-        </div> --}}
         </span>
         </div>
     </div>
@@ -155,12 +136,28 @@
             <td>{{$transaction->name}}</td>
             <td>{{$transaction->price}}</td>
             <td>{{$transaction->price * $transaction->amount}}</td>
-            <td style="text-align: center"><button>+</button><button>-</button><button>x</button>
+            <td style="text-align: center">
+                {{-- <form action="/billidk/add/{bill_id}/{item_id}" method = "POST">
+                    <label value = "{{$bill_id}}">
+                    <label value = "{{$transaction->item_id}}">
+                    <input class = "buttons" type = "submit" value = "+">
+                </form>
+                <form action="/billidk/min/{bill_id}/{item_id}" method = "POST">
+                    <label value = "{{$bill_id}}">
+                    <label value = "{{$transaction->item_id}}">
+                    <input class = "buttons" type = "submit" value = "-">
+                </form>
+                <form action="/billidk/remove/{bill_id}/{item_id}" method = "POST">
+                    <label value = "{{$bill_id}}">
+                    <label value = "{{$transaction->item_id}}">
+                    <input class = "buttons" type = "submit" value = "x">
+                </form> --}}
+            </td>
         </tr>
     @endforeach
 </table>
 
-<form action="/billidk/{{$bill_id}}" method = "POST">
+<form action="/billidk/close/{{$bill_id}}" method = "POST">
 {{-- <input class=buttons id="closeButton"Close Bill> --}}
 <input class = "buttons" type = "submit" value = "Close Bill">
 </form>

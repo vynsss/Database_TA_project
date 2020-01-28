@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Bill;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Routing\Redirector;
 
 class BillController extends Controller
 {
@@ -39,7 +40,7 @@ class BillController extends Controller
     }
 
     public function history_date($date){
-        $bill = DB::select("SELECT * FROM bills INNER JOIN cashiers ON bills.cashier_id = cashiers.id WHERE bills.close = ? AND bills.date IS NOT NULL", [$date]);
+        $bill = DB::select("SELECT *, bills.id AS bill_id FROM bills INNER JOIN cashiers ON bills.cashier_id = cashiers.id WHERE bills.date = ? AND bills.close IS NOT NULL", [$date]);
         return view('history_per_date', ['bills'=>$bill, 'date'=>$date]);
     }
 
@@ -63,14 +64,14 @@ class BillController extends Controller
         // // $transactions = $bill->transactions;
         // $servicetax = DB::select("SELECT * FROM service_taxes");
         $items = DB::select("SELECT * FROM items");
-        $transactions = DB::select("SELECT * FROM transactions INNER JOIN items ON transactions.item_id = items.id WHERE transactions.bill_id = ? and transactions.bill_id is not null", [$bill_id]);
+        $transactions = DB::select("SELECT *, transactions.id AS transaction_id, items.id AS item_id FROM transactions INNER JOIN items ON transactions.item_id = items.id WHERE transactions.bill_id = ? and transactions.bill_id is not null", [$bill_id]);
 
         return view('bill', ['bills'=>$bill, 'items'=>$items, 'transactions'=>$transactions, 'bill_id'=>$bill_id]);
     }
 
     public function close_bill($bill_id){
         $close = DB::update('update bills set close = CURDATE() where id = ?', [$bill_id]);
-        return redirect('/historybill/{{$bill_id}}');
+        return back();
     }
 
 }

@@ -27,7 +27,6 @@
         <th>Menu</th>
         <th>price</th>
         <th>total price</th>
-        <th></th>
     </tr>
     @foreach ($transactions as $transaction)
         <tr>
@@ -35,10 +34,16 @@
             <td>{{$transaction->name}}</td>
             <td>{{$transaction->price}}</td>
             <td>{{$transaction->price * $transaction->amount}}</td>
-            <td style="text-align: center"><button>+</button><button>-</button><button>x</button>
         </tr>
     @endforeach
 </table>
+
+<div class = the-total>
+    <h3>Sub Total: <span>{{end($bill)->date}}</span></h3>
+    <h3>Service: <span>{{end($bill)->id}}</span></h3>
+    <h3>Tax: <span>{{end($bill)->table_no}}</span></h3>
+    <h3>Total: <span>{{end($bill)->table_no}}</span></h3>
+</div>
 
 <button class=buttons id="backButton">Back</button>
 
@@ -46,7 +51,6 @@
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
     }
-
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
     }
@@ -54,4 +58,3 @@
 
 </body>
 </html>
-
