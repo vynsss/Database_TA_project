@@ -90,9 +90,9 @@ td:first-child, th:first-child {
 
 .the-header h2 {
     margin-top:2px;
-    margin-left:40%;
+    /* margin-left:40%; */
     font-size:250%;
-
+    text-align: center;
 }
 
 .the-total h3 {

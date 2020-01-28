@@ -45,7 +45,7 @@ class BillController extends Controller
     }
 
     public function history_bill($bill_id){
-        $bill = DB::select("SELECT *, bills.id AS bill_id, cashiers.id AS cashier_id FROM bills INNER JOIN branches ON bills.branch_id = branches.id INNER JOIN servers ON servers.id = bills.server_id INNER JOIN cashiers ON cashiers.id = bills.cashier_id INNER JOIN service_taxes ON service_taxes.id = bills.service_tax_id WHERE bills.id = ? limit 1", [$bill_id]);
+        $bill = DB::select("SELECT *, bills.id AS bill_id, cashiers.id AS cashier_id, branches.name AS branch_name, cashiers.name AS cashier_name, servers.name AS server_name FROM bills INNER JOIN branches ON bills.branch_id = branches.id INNER JOIN servers ON servers.id = bills.server_id INNER JOIN cashiers ON cashiers.id = bills.cashier_id INNER JOIN service_taxes ON service_taxes.id = bills.service_tax_id WHERE bills.id = ? limit 1", [$bill_id]);
         // $cashier = DB::select("SELECT * FROM cashiers WHERE cashiers.id = ? limit 1", [end($bill)->cashier_id]);
         $items = DB::select("SELECT * FROM items");
         $transactions = DB::select("SELECT * FROM transactions INNER JOIN items ON transactions.item_id = items.id WHERE transactions.bill_id = ? and transactions.bill_id is not null", [$bill_id]);

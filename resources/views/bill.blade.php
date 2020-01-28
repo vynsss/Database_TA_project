@@ -17,7 +17,7 @@
     <h2>SPICE PARADISE</h2>
     <h2>{{end($bills)->branch_name}}</h2>
     <h2>{{end($bills)->phone}}</h2>
-<h3><span><script> document.write(new Date().toLocaleDateString()); </script></span></h3>
+<h3><span>{{end($bills)->date}}</span></h3>
 <h3>Bills Table: <span> {{end($bills)->table_no}} </span></h3>
 </div>
 
