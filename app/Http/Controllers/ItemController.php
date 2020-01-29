@@ -11,7 +11,7 @@ class ItemController extends Controller
     public function index(){
         $item = DB::select("SELECT * FROM items"); //table doesnt exist?
         // return $item;
-        return view('bill', ['items'=>$item]);
+        return view('menu', ['items'=>$item]);
     }
 
     public function store(Request $request){
@@ -22,6 +22,6 @@ class ItemController extends Controller
                 'price' => $request->price
             ]
         );
-        return response()->json($item);
+        return back();
     }
 }

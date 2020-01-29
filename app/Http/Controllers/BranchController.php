@@ -11,18 +11,18 @@ class BranchController extends Controller
     public function index(){
         // $branch = Branch::all();
         $branch = DB::select("SELECT * FROM branches");
-        return $branch;
-        // return view('welcome', ['branches' => $branch]);
+        return view('branch', ['branches' => $branch]);
     }
 
     public function store(Request $request){
-        DB::enableQueryLog();
-        $branch = Branch::create([
-            'name' => $request->name,
-            'phone' => $request->phone
-        ]);
-        $query = DB::getQueryLog();
+        $branch = DB::insert(
+            'INSERT INTO branches (name, phone) VALUES (:name, :phone)',
+            [
+                'name' => $request->name,
+                'phone' => $request->phone
+            ]
+        );
 
-        return $query;
+        return back();
     }
 }

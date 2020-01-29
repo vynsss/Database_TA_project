@@ -10,13 +10,16 @@ class CashierController extends Controller
 {
     public function index(){
         $cashier = DB::select("SELECT * FROM cashiers");
-        return $cashier;
+        return view('cashier', ['cashiers'=>$cashier]);
     }
 
     public function store(Request $request){
-        $cashier = Cashier::create([
-            'name' => $request->name,
-        ]);
-        return $cashier;
+        $cashier =  DB::insert(
+            'INSERT INTO cashiers (name) VALUES (:name)',
+            [
+                'name' => $request->name
+            ]
+            );
+        return back();
     }
 }

@@ -10,6 +10,18 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="#">Today</a>
     <a href="http://localhost:8000/histories">History</a>
+    <div class="dropdown">
+        <button class="but">Update
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="http://localhost:8000/items">Menu</a>
+            <a href="http://localhost:8000/cashiers">Cashier</a>
+            <a href="http://localhost:8000/servicestaxes">Service & Tax</a>
+            <a href="http://localhost:8000/branches">Branch</a>
+            <a href="http://localhost:8000/servers">Server</a>
+        </div>
+    </div>
 </div>
 
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>

@@ -10,13 +10,15 @@ class ServerController extends Controller
 {
     public function index(){
         $server = DB::select("SELECT * FROM servers");
-        return $server;
+        return view('server', ['servers'=>$server]);
     }
 
     public function store(Request $request){
-        $server = Server::create([
-            'name' => $request->name,
-        ]);
-        return $server;
+        $server = DB::insert(
+            'INSERT INTO server (name) VALUES (:name)',
+            [
+                'name' => $request->name
+            ]);
+        return back();
     }
 }

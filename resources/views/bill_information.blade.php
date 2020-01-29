@@ -10,6 +10,18 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="http://localhost:8000/bills">Today</a>
     <a href="http://localhost:8000/histories">History</a>
+    <div class="dropdown">
+        <button class="but">Update
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="http://localhost:8000/items">Menu</a>
+            <a href="http://localhost:8000/cashiers">Cashier</a>
+            <a href="http://localhost:8000/servicestaxes">Service & Tax</a>
+            <a href="http://localhost:8000/branches">Branch</a>
+            <a href="http://localhost:8000/servers">Server</a>
+        </div>
+    </div>
 </div>
 
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
@@ -49,8 +61,6 @@
     <h3>Cashier     : <span> {{end($bill)->cashier_name}} </span></h3>
     <h3>Server      : <span> {{end($bill)->server_name}} </span></h3>
     </div>
-
-<button class=buttons id="backButton">Back</button>
 
 <script>
     function openNav() {

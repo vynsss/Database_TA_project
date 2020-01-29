@@ -10,7 +10,7 @@ class ServiceTaxController extends Controller
 {
     public function index(){
         $service_tax = DB::select("SELECT * FROM service_taxes");
-        return $service_tax;
+        return view('service_tax', ['snts'=>$service_tax]);
     }
 
     public function store(Request $request){
@@ -18,7 +18,7 @@ class ServiceTaxController extends Controller
             'service' => $request->service,
             'tax' => $request->tax,
         ]);
-        return $service_tax;
+        return back();
     }
 
 }
